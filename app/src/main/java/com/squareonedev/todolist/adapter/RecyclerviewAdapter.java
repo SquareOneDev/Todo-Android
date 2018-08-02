@@ -1,4 +1,4 @@
-package com.squareonedev.todolist;
+package com.squareonedev.todolist.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
