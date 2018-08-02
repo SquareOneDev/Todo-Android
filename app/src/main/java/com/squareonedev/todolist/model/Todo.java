@@ -1,4 +1,4 @@
-package com.squareonedev.todolist;
+package com.squareonedev.todolist.model;
 
 public class Todo {
 
