@@ -23,9 +23,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -83,11 +86,23 @@ public class CalendarActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        Log.d(TAG, document.getId() + " => " + document.getData());
-                        document.toObject(Todo.class);
+                        //Log.d(TAG, document.getId() + " => " + document.getData());
                     }
                 } else {
                     Log.w(TAG, "Error getting documents.", task.getException());
+                }
+            }
+        });
+
+        DocumentReference ref = database.collection("todos")
+                .document("bAxDJcQEFboY1yWVHQGI");
+
+        ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Todo todoList = documentSnapshot.toObject(Todo.class);
+                if (todoList != null) {
+                    Log.d(TAG, "Todo" + todoList.getTodo());
                 }
             }
         });

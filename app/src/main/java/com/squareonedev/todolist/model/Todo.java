@@ -4,6 +4,14 @@ public class Todo {
 
     public String mTodo;
 
+    public Todo() {
+
+    }
+
+    public Todo(String todo) {
+        mTodo = todo;
+    }
+
     public String getTodo() {
         return mTodo;
     }
